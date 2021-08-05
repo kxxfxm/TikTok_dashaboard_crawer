@@ -35,10 +35,13 @@ cookies = browser_cookie3.chrome()  # firefox可以替换为browser_cookie3.fire
 r = requests.get(url,headers=headers, cookies=cookies)
 print(r.text)
 ```
-**结果**：失败，有待于进一步研究原因，猜测可能需要结合session。并且更棘手的问题是部分抖音罗盘的页面是动态页面，只用页面源码无法爬取内容，需要运行js，太过繁琐决定放弃。
+**结果**：失败，有待于进一步研究原因，猜测可能需要结合session。并且更棘手的问题是部分抖音罗盘的页面是动态嵌套页面(如下)，只用页面源码无法爬取内容，需要运行js，因此太过繁琐决定放弃。
+```
+<iframe src="/screen/shop?live_room_id=...&amp;live_app_id=...&amp;source=shop_live_detail" title="大屏内容" class="..."></iframe>
+```
 
 #### 二、selenium包
-selenium需要运行一个浏览器，以这个浏览器为接口，和目标服务器进行交互。因此优缺点明显：无法后台运行；效率较差；可以爬取动态网页。
+selenium需要运行一个浏览器，以这个浏览器为接口，和目标服务器进行交互。因此优缺点明显：无法后台运行；效率较差难以并行处理多个；可以爬取动态网页。
 ###### 安装一个chrome浏览器
 也可以手动下载安装，注意和我们日常用的chrome不是一个东西
 ```
